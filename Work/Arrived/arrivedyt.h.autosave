@@ -1,0 +1,70 @@
+#ifndef ARRIVEDYT_H
+#define ARRIVEDYT_H
+
+#include <QObject>
+#include <QSqlDatabase>
+#include <QTcpSocket>
+
+class ArrivedYt : public QObject
+{
+    Q_OBJECT
+public:
+    explicit ArrivedYt(QObject *parent = nullptr);
+
+signals:
+
+public slots:
+    void socektSuccess();
+    void socketError();
+    void readSocket();
+
+private:
+    QString createDbConnection(); //创建数据库连接
+    void createSocketConnection();
+    void autoConnection();
+    void timerEvent(QTimerEvent *);
+    void getSignature();
+    void getConfigure();
+    QByteArray createOpRecord(QJsonObject opRecord);
+    QByteArray createMessage(QByteArray opRecord);
+    void getData(); //从数据库获取数据
+    QJsonObject createJsonObject(QString waybillNo, QString createTime, QString nextOrgCode, QString boxId);
+    void sendMessage(QByteArray message);
+    void readUserCodeUserName();
+
+private:
+    QSqlDatabase db;
+    QString tableName;
+    QString signature;
+    QString mty; //由界面输入
+
+    QTcpSocket *socket;
+    bool errorLabel; //是否将错误显示到标签
+
+    //圆通消息接口
+    QString userName;
+    QString password;
+
+    QString createOrgCode;
+    QString createTerminal;
+    QString createUserCode;
+    QString createUserName;
+
+    QString effectiveTypeCode;
+    QString expType;
+    QString expressContentCode;
+    QString feeFlag;
+    QString frequencyNo;
+
+    QString nextOrgCode;
+    QString orgCode;
+    QString previousOrgCode;
+    QString sourceOrgCode;
+    QString opCode;
+    QString line;
+    QString remark;
+
+    QHash<QString, QPair<QString, QString> > userCodeUserNameHash;
+};
+
+#endif // ARRIVEDYT_H

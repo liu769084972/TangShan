@@ -1,0 +1,12 @@
+#ifndef ARRIVEDSENDBAG_H
+#define ARRIVEDSENDBAG_H
+
+#include <QFrame>
+
+class ArrivedSendBag : public QFrame
+{
+public:
+    ArrivedSendBag(QWidget *parent = nullptr);
+};
+
+#endif // ARRIVEDSENDBAG_H

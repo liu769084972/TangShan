@@ -1,0 +1,7 @@
+#include "arrivedsendbag.h"
+
+ArrivedSendBag::ArrivedSendBag(QWidget *parent)
+    : QFrame (parent)
+{
+
+}
